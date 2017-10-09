@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float thrusterFuelRegen = 0.3f;
 
+    [SerializeField]
     private float thrusterFuelAmount = 1f;
 
     [SerializeField]
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     //For mouselock
     private bool showingMouse = true;
+    AudioManager audioManager;
 
     private void Start()
     {
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour
         configjoint = GetComponent<ConfigurableJoint>();
         SetJointSettings(jointSpringAmnt);
         animator = GetComponent<Animator>();
+        audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
 
         // Create basic mouselock:
         showingMouse = false;
@@ -159,7 +162,6 @@ public class PlayerController : MonoBehaviour
 
         // Calculate Camera Rotation
         float _xRot = Input.GetAxisRaw("Mouse Y");
-        //replaced:  Vector3 _cameraRotation = new Vector3(_xRot, 0, 0) * turnspeed;
         float _cameraRotationX = _xRot * turnspeed;
         // Apply camera rotation
         motor.RotateCamera(_cameraRotationX);
@@ -168,8 +170,6 @@ public class PlayerController : MonoBehaviour
         Vector3 _thrusterForce = Vector3.zero;
 
 
-
-        // Regular Jet Thrust
         if (Input.GetButton("Jump") && thrusterFuelAmount > 0f)
         {
             thrusterFuelAmount -= thrusterFuelBurnRate * Time.deltaTime;
@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour
     
         // Apply the thruster force
         motor.ApplyThruster(_thrusterForce);
+        
     }
 
     //Method that sets the Joint Settings

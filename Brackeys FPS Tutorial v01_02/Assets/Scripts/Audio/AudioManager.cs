@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
         foreach (Sound s in Sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
+            //s.source.name = "AS" + s.name;
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
@@ -31,29 +32,34 @@ public class AudioManager : MonoBehaviour
             s.source.playOnAwake = s.plyAwake;
             s.source.outputAudioMixerGroup = s.outputToGroup;
         }
+
 	}
 
     private void Start()
     {
         //Player = GameObject.Find("Player 2");
-        //Play("SndMusicBG", Player, 680f);
+        Play("sndAtmosphere");
         
     }
 
     // Update is called once per frame
-    public void Play(string name,  GameObject _sndSource = null, float _plytime = 3f)
+    public void Play(string name,  GameObject _sndSource = null, float _plytime = 300f)
     {
         Sound s = Array.Find(Sounds, sound => sound.name == name);
         if(_sndSource != null)
         {
             s.source = _sndSource.AddComponent<AudioSource>();
+            
+            //insert line to make sure the ASrc is named so I can destroy if its not needed anymore.
             SetupSound(s);
         }
 
         s.source.Play();
 
-        Destroy(s.source, _plytime);
-       
+        if (s.source != null)
+        {
+            Destroy(s.source, _plytime);
+        }
     }
     
     private void SetupSound(Sound s)

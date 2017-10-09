@@ -5,6 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(PlayerSetup))]
 public class Player : NetworkBehaviour
 {
+
     [SyncVar]
     private bool _isDead = false;
     public bool IsDead
@@ -190,6 +191,13 @@ public class Player : NetworkBehaviour
         Collider _col = GetComponent<Collider>();
         if (_col != null)
             _col.enabled = true;
+
+        AudioManager audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
+        audioManager.Play("sndBoosterRegular", gameObject, 300f);
+        //ThrusterSounds thrusterSounds = FindObjectOfType<ThrusterSounds>();
+        //thrusterSounds.StartRegularBoosterSound();
+
+
     }
 
     public float GetHealthBarAmt()

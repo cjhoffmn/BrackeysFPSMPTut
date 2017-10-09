@@ -19,7 +19,7 @@ public class Benchmark : MonoBehaviour
     private void Start()
     {
         _pool = new ObjectPool(go);
-        _despawn.text = " ";
+        _despawn.text = "-";
     }
 
     public void OnBenchmarkButtonClick()

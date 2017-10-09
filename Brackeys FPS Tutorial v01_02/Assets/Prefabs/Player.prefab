@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 4933513985468334}
   - component: {fileID: 33921441625555238}
   - component: {fileID: 23541514047620458}
+  - component: {fileID: 114438725136758110}
   m_Layer: 8
   m_Name: Thrusters
   m_TagString: Untagged
@@ -978,6 +979,27 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114438725136758110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465776811933898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230bd680a66bf7146aa3fcc79a6742ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boosterSoundClip:
+    name: sndBoosterBoost
+    clip: {fileID: 8300000, guid: c1193ab7871a0074a8371474e30fdbb0, type: 3}
+    source: {fileID: 0}
+    volume: 0
+    pitch: 0
+    loop: 0
+    spacial: 0
+    plyAwake: 0
+    outputToGroup: {fileID: 0}
 --- !u!114 &114495562287464702
 MonoBehaviour:
   m_ObjectHideFlags: 1

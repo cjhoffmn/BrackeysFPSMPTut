@@ -33,9 +33,9 @@ public class PlayerShoot : NetworkBehaviour
 
     void Update()
     {
-        currentWeapon = weaponManager.GetCurrentWeapon();
-
         if (PauseMenu.isOn == true) return;
+
+        currentWeapon = weaponManager.GetCurrentWeapon();
 
         if (currentWeapon.bullets < currentWeapon.maxBullets)
         {
@@ -140,9 +140,7 @@ public class PlayerShoot : NetworkBehaviour
 
         //calls shoot method on the server
         currentWeapon.bullets--;
-
-        Debug.Log(transform.name + " remaining bullets = " + currentWeapon.bullets);
-
+            //Debug.Log(transform.name + " remaining bullets = " + currentWeapon.bullets);
         weaponManager.Firing();
         Recoil();
         CmdOnShoot();
@@ -152,8 +150,6 @@ public class PlayerShoot : NetworkBehaviour
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, currentWeapon.range, mask))
         {
             // We hit something
-            //Debug.Log("We hit " + _hit.collider.name);
-
             if (_hit.collider.tag == PLAYER_TAG || _hit.collider.tag == TARGET_TAG)
             {
                 CmdPlayerShot(_hit.collider.name, currentWeapon.damage, transform.name);
@@ -184,10 +180,7 @@ public class PlayerShoot : NetworkBehaviour
     [Command]
     void CmdPlayerShot(string _PlayerID, int _damage, string _sourceID)
     {
-        //Debug.Log(_PlayerID + "has been shot");
-
         Player _player = GameManager.GetPlayer(_PlayerID);
         _player.RpcTakeDamage(_damage, _sourceID);
-
     }
 }
